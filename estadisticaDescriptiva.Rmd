@@ -9,7 +9,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r, tidy=TRUE}
 X <- c(120, 121, 120, 119, 121, 120, 120, 119, 120, 121, 120, 120, 122, 120, 121, 120, 119, 122, 120, 119)
 ```
 
@@ -299,42 +299,40 @@ summary(X)
 
 ### Medidas de Forma
 
-*Concentración*
+**Concentración**
 
 ```{r}
 library(moments)
-c = c(22,22,23,24,26,27,28,29,29,29,31,33,34,35,35,35,36,38,39,42,44,44,45,45,45,47,48,52,59,66,67,69,69)
-```
-
-```{r}
+c <- c(22, 22, 23, 24, 26, 27, 28, 29, 29, 29, 31, 33, 34, 35, 35, 35, 36, 38, 39, 42, 44, 44, 45, 45, 45, 47, 48, 52, 59, 66, 67, 69, 69)
 c
 ```
 
-
 ```{r}
-media_c = mean(c)
-media_c 
+media_c <- mean(c)
+media_c
 ```
 
 ```{r}
-desviacion_media = sum((c-media_c)^2)/(length(c))
-desviacion_media 
+desviacion_media <- sum((c - media_c)^2) / (length(c))
+desviacion_media
 ```
 
-*Curtosis*
+**Asimetría**
+
+```{r}
+# asimetria
+skewness_c <- skewness(c)
+skewness_c
+```
+
+
+**Curtosis**
 
 ```{r}
 kurtosis_c <- kurtosis(c)
 kurtosis_c
 ```
 
-*Asimetría*
-
-```{r}
-# asimetria
-skewness_c <- skewness(c)
-skewness_c 
-```
 
 ```{r}
 curtosis_c <- mean((c - mean(c))^4) / sd(c)^4 - 3
