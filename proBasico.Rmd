@@ -1,0 +1,195 @@
+---
+title: "Informe en LaTeX con RStudio"
+author: "Paúl Arévalo, Esteban Vizhñay"
+date: "2024-06-28"
+output: pdf_document
+---
+
+# Introducción
+
+```{r}
+library(readr)
+Alumnos <- read_csv("Alumnos.csv")
+```
+
+```{r}
+Alumnos
+```
+
+### Mediana de la estatura
+
+```{r}
+median(Alumnos$Estatura)
+```
+
+### Primer y tercer cuartil de la estatura
+
+```{r}
+quantile(Alumnos$Estatura)
+```
+
+### Mediana de la estatura
+
+```{r}
+mean(Alumnos$Estatura)
+```
+
+### Amplitud de la estatura
+
+```{r}
+max(Alumnos$Estatura) - min(Alumnos$Estatura)
+```
+
+### Desviación Estandar de la estatura
+
+```{r}
+max(Alumnos$Estatura) - min(Alumnos$Estatura)
+```
+
+### Porcentaje de hombres en la muestra
+
+```{r}
+soloHombres = Alumnos[ which(Alumnos$Sexo =="Hombre"),]
+dim(soloHombres)
+```
+
+```{r}
+porcentajeHombres = (dim(soloHombres) * 100) / dim(Alumnos)
+porcentajeHombres
+```
+
+### Estatura Media,desviación estándar para los hombres
+
+```{r}
+min(soloHombres$Estatura)
+```
+
+```{r}
+sd(soloHombres$Estatura)
+```
+
+### Estatura media, desviación estándar para las mujeres
+
+
+```{r}
+soloMujeres = Alumnos[ which(Alumnos$Sexo =="Mujer"),]
+mean(soloMujeres$Estatura)
+```
+
+```{r}
+sd(soloMujeres$Estatura)
+```
+
+### Coeficiente de correlación
+
+
+```{r}
+cor(Alumnos$Peso, Alumnos$Estatura)
+```
+
+### Cuantas personas tiene un gato
+
+
+```{r}
+tieneGatos = Alumnos[ which(Alumnos$Mascota =="Gato"),]
+dim(tieneGatos)
+```
+
+
+### Cuantas mujeres tiene un gato
+
+```{r}
+mujeresTienenGato = Alumnos[ which(Alumnos$Sexo =="Mujer" & Alumnos$Mascota =="Gato"),]
+dim(mujeresTienenGato)
+```
+
+
+### Porcentaje de la muestra que son hombres y tienen un gato
+
+```{r}
+hombresTienenGato = Alumnos[ which(Alumnos$Sexo =="Hombre" & Alumnos$Mascota =="Gato"),]
+dim(hombresTienenGato)
+```
+```{r}
+hombresTienenGato
+```
+
+
+### Si seleccionamos al azar a un individuo de la muestra, ¿qué probabilidad hay de que sea mujer o tenga un perro?
+
+
+```{r}
+sonMujeres = Alumnos[which(Alumnos$Sexo == "Mujer"),]
+dim(sonMujeres)
+```
+
+
+```{r}
+tienenPerro = Alumnos[which(Alumnos$Mascota == "Perro"),]
+dim(tienenPerro)
+```
+
+
+
+```{r}
+mujeresConPerro = Alumnos[which(Alumnos$Sexo == "Mujer" & Alumnos$Mascota == "Perro"),]
+dim(mujeresConPerro)
+```
+
+
+```{r}
+
+resultado=(dim(sonMujeres)/100) + (dim(tienenPerro)/100) - (dim(mujeresConPerro)/100)
+resultado
+
+```
+
+### Si seleccionamos al azar a un individuo de la muestra, ¿qué probabilidad hay de que sea hombre y tenga un gato?
+
+
+```{r}
+hombreConGato=Alumnos [ which(Alumnos$Sexo=="Hombre" & Alumnos$Mascota=="Gato"),]
+dim(hombreConGato)
+```
+
+
+```{r}
+resultado=dim(hombreConGato)/100
+resultado
+```
+
+
+### Si sabemos que la persona seleccionada es un hombre, ¿qué probabilidad hay de que tenga un perro, redondeado a dos decimales?
+
+```{r}
+soloHombres <- Alumnos [ which(Alumnos$Sexo=="Hombre"),]
+dim(soloHombres)
+
+```
+
+
+```{r}
+hombreConPerro=Alumnos [ which(Alumnos$Sexo=="Hombre" & Alumnos$Mascota=="Perro"),]
+dim(hombreConPerro)
+```
+
+
+
+
+```{r}
+
+resultado=dim(hombreConPerro)/dim(soloHombres)
+resultado
+```
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,298 @@
+---
+title: "Estadistica Descriptiva"
+author: "Paúl Arévalo, Esteban Vizhñay"
+date: "2024-06-28"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+X <- c(120, 121, 120, 119, 121, 120, 120, 119, 120, 121, 120, 120, 122, 120, 121, 120, 119, 122, 120, 119)
+```
+
+La Frecuencia Absoluta y Frecuencia Relativa se calcula de la siguiente manera:
+
+```{r}
+table(X)
+```
+
+```{r}
+table(X) / length(X)
+```
+
+```{r}
+addmargins(table(X))
+```
+
+```{r}
+addmargins(table(X) / length(X))
+```
+
+### Frecuencias Acumuladas
+
+```{r}
+cumsum(table(X))
+```
+
+```{r}
+cumsum(table(X) / length(X))
+```
+
+### Gráficos para clases de tipo Cualitativo
+
+```{r}
+barplot(table(X), xlab = "Clase", ylab = "Frecuencia")
+```
+```{r}
+barplot(table(X) / length(X), xlab = "Clase", ylab = "Frecuencia")
+```
+
+**Diagrama de sectores**
+
+```{r}
+pie(table(X))
+```
+
+```{r}
+pie(table(X) / length(X))
+```
+
+### Gráficos para Clases Cuantitativas
+
+**Diagrama de Barras**
+
+```{r}
+barplot(table(X), space = c(100, 2))
+```
+
+```{r}
+barplot(table(X) / length(X), space = c(100, 2))
+```
+**Histograma**
+
+```{r}
+hist(X)
+```
+
+**Polígono de Frecuencias**
+
+**Tallo y Hoja**
+Procedimiento semigráfico útil cuando se tiene menos de 50 datos.
+
+```{r}
+stem(X)
+```
+
+```{r}
+ingresos <- c(66814.195, 42144.338, 25697.767, 35976.874, 39060.606, 13362.839, 61674.641, 53451.356)
+stem(ingresos)
+```
+
+**Box Plot**
+
+```{r}
+boxplot(X)
+```
+
+```{r}
+boxplot(ingresos)
+```
+
+### Agrupación de Datos Cuantitativos
+
+```{r}
+datos <- c(4, 8, 4, 6, 8, 6, 7, 7, 7, 8, 10, 9, 7, 6, 10, 8, 5, 9, 6, 3, 7, 6, 4, 7, 6, 9, 7, 4, 7, 6, 8, 8, 9, 11, 8, 7, 10, 8, 5, 7, 7, 6, 5, 10)
+```
+
+### Longitud de Datos
+
+```{r}
+n <- length(datos)
+n
+```
+
+**Recomendaciones para construir la tabla de fercuencias**
+
+### Rango R
+
+```{r}
+mayorValor <- max(datos)
+menorValor <- min(datos)
+R <- mayorValor - menorValor
+```
+
+extraer el max y min en un nuevo vector, puede ser alternativo
+
+```{r}
+rango <- range(datos)
+```
+
+### Número de clases de acuerdo a la recomendación
+
+```{r}
+k <- 6
+```
+
+### Amplitud
+
+```{r}
+Amplitud <- R / k
+```
+
+por simplicitud se redefine a la amplitud como 1
+
+```{r}
+Amplitud <- round(Amplitud)
+```
+
+### Limites de los intervalos
+
+```{r}
+seq(menorValor, mayorValor, length = k)
+```
+
+### Construcción de los intervalos mediante la función cut():
+
+```{r}
+intervalosDatos <- cut(datos, breaks = seq(menorValor, mayorValor, length = k), include.lowest = TRUE)
+```
+
+### frecuencia absoluta
+
+```{r}
+frecuencia <- table(intervalosDatos)
+frecuencia
+```
+
+### Frecuencia Relativa fr
+
+```{r}
+fr <- frecuencia / n # fr=prop.table(frecuencia)
+fr
+```
+
+### Frecuencia Acumulada F
+
+```{r}
+F <- cumsum(frecuencia)
+F
+```
+
+
+### Frecuencia Acumulada Relativa Fra
+
+```{r}
+Fra <- cumsum(fr)
+```
+
+
+### Tabla final de frecuencias
+
+```{r}
+tablafinal <- cbind(frecuencia, fr, F, Fra) # juntamos todo
+tablafinal
+```
+
+
+## Medidas Estadísticas
+
+### Medidas de Tendencia Central
+
+**Media Aritmética**
+
+```{r}
+X
+```
+
+```{r}
+mean(X)
+```
+
+```{r}
+ingresos
+```
+
+```{r}
+mean(ingresos)
+```
+
+```{r}
+hist(ingresos, breaks = seq(0, 100000, by = 10000), freq = FALSE, main = "Histograma de Ingresos", ylab = "Densidad de Frecuencia")
+points(mean(ingresos), -0.0000005, pch = 24, cex = 2.8)
+```
+
+**Mediana**
+
+```{r}
+median(X)
+```
+
+**Moda**
+
+```{r}
+moda <- function(x) {
+    t <- table(x)
+    return(as.numeric(names(t)[t == max(t)]))
+}
+```
+
+```{r}
+moda(X)
+```
+
+### Medidas de Dispersión
+
+```{r}
+X <- c(120, 121, 120, 119, 121, 120, 120, 119, 120, 121, 120, 120, 122, 120, 121, 120, 119, 122, 120, 119)
+```
+
+**Rango**
+
+```{r}
+range(X)
+```
+
+**Varianza Muestral**
+
+```{r}
+var(X)
+```
+
+**Desviación Estándar Muestral (desviación típica)**
+
+```{r}
+sd(X)
+```
+
+**Desviación Media**
+
+**Coeficiente de Variación**
+
+### Medidas de Dispersión
+
+**Cuartiles**
+
+```{r}
+quantile(X, c(0.25, 0.50, 0.75))
+```
+
+**Percentiles**
+
+```{r}
+quantile(X, c(0.01, 0.02, 0.9))
+```
+
+**Deciles**
+
+```{r}
+quantile(X, c(0.1, 0.20, 0.30))
+```
+
+**Resumen**
+
+```{r}
+summary(X)
+```
