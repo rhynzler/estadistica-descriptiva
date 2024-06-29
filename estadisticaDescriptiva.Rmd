@@ -2,15 +2,19 @@
 title: "Estadistica Descriptiva"
 author: "Paúl Arévalo, Esteban Vizhñay"
 date: "2024-06-28"
-output: pdf_document
+output: 
+  pdf_document:
+    extra_dependencies: ["fvextra"]
+    includes:
+      in_header: header.tex
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, tidy=TRUE}
-X <- c(120, 121, 120, 119, 121, 120, 120, 119, 120, 121, 120, 120, 122, 120, 121, 120, 119, 122, 120, 119)
+```{r}
+X <- c(120, 121, 120, 119, 121, 120, 120, 119, 120, 121, 120, 120, 122, 120, 121, 120, 119, 122, 120, 119) # nolint
 ```
 
 La Frecuencia Absoluta y Frecuencia Relativa se calcula de la siguiente manera:
@@ -87,7 +91,7 @@ stem(X)
 ```
 
 ```{r}
-ingresos <- c(66814.195, 42144.338, 25697.767, 35976.874, 39060.606, 13362.839, 61674.641, 53451.356)
+ingresos <- c(66814.195, 42144.338, 25697.767, 35976.874, 39060.606, 13362.839, 61674.641, 53451.356) # nolint
 stem(ingresos)
 ```
 
@@ -104,7 +108,7 @@ boxplot(ingresos)
 ### Agrupación de Datos Cuantitativos
 
 ```{r}
-datos <- c(4, 8, 4, 6, 8, 6, 7, 7, 7, 8, 10, 9, 7, 6, 10, 8, 5, 9, 6, 3, 7, 6, 4, 7, 6, 9, 7, 4, 7, 6, 8, 8, 9, 11, 8, 7, 10, 8, 5, 7, 7, 6, 5, 10)
+datos <- c(4, 8, 4, 6, 8, 6, 7, 7, 7, 8, 10, 9, 7, 6, 10, 8, 5, 9, 6, 3, 7, 6, 4, 7, 6, 9, 7, 4, 7, 6, 8, 8, 9, 11, 8, 7, 10, 8, 5, 7, 7, 6, 5, 10) # nolint
 ```
 
 ### Longitud de Datos
@@ -139,7 +143,7 @@ k <- 6
 ### Amplitud
 
 ```{r}
-Amplitud <- R / k
+Amplitud <- R / k # nolint
 ```
 
 por simplicitud se redefine a la amplitud como 1
